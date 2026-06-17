@@ -9,7 +9,7 @@ import spotLogo from 'figma:asset/87d319d70a74f2182b104a15a264753a0cfb9143.png';
 import { GoogleLogin } from "@react-oauth/google";
 import { toast } from "sonner";
 import FacebookLogin from 'react-facebook-login';
-
+import { API_URL } from "../config/api";
 // Eye icons as inline SVG components
 const Eye = ({ className }: { className?: string }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,7 +141,7 @@ export const Login: React.FC<LoginProps> = ({ onNavigate, onLoginSuccess }) => {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/auth/google", {
+    const res = await fetch(`${API_URL}/auth/google`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -169,7 +169,7 @@ export const Login: React.FC<LoginProps> = ({ onNavigate, onLoginSuccess }) => {
           console.log("FB TOKEN:", accessToken);
 
           // ابعتيه للباك
-          fetch("http://localhost:5000/auth/facebook", {
+          fetch(`${API_URL}/auth/facebook`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -190,7 +190,7 @@ export const Login: React.FC<LoginProps> = ({ onNavigate, onLoginSuccess }) => {
     e.preventDefault();
 
     try {
-      const adminRes = await fetch("http://localhost:5000/admin/login", {
+      const adminRes = await fetch(`${API_URL}/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -208,7 +208,7 @@ export const Login: React.FC<LoginProps> = ({ onNavigate, onLoginSuccess }) => {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/auth/signin", {
+      const res = await fetch(`${API_URL}/auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -254,7 +254,7 @@ export const Login: React.FC<LoginProps> = ({ onNavigate, onLoginSuccess }) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/auth/signup", {
+      const res = await fetch(`${API_URL}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -284,7 +284,7 @@ export const Login: React.FC<LoginProps> = ({ onNavigate, onLoginSuccess }) => {
 
   const handleVerifyOtp = async () => {
     try {
-      const res = await fetch("http://localhost:5000/auth/verify-otp", {
+      const res = await fetch(`${API_URL}/auth/verify-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -317,7 +317,7 @@ export const Login: React.FC<LoginProps> = ({ onNavigate, onLoginSuccess }) => {
 
   const handleResend = async () => {
     try {
-      const res = await fetch("http://localhost:5000/auth/resend-otp", {
+      const res = await fetch(`${API_URL}/auth/resend-otp`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

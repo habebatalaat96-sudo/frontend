@@ -16,6 +16,7 @@ import {
   Tag
 } from 'lucide-react';
 import spotLogo from 'figma:asset/87d319d70a74f2182b104a15a264753a0cfb9143.png';
+import { API_URL } from "../config/api";
 
 interface ChatbotProps {
   onNavigate: (page: string, section?: string, tab?: any, serviceData?: any) => void;
@@ -248,7 +249,7 @@ services: rec.services?.map((s: any) => ({
     setIsTyping(true);
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/chat', {
+      const response = await fetch(`${API_URL}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

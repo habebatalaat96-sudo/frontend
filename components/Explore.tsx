@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card } from './ui/card';
 import { Star, MapPin, MessageCircle, Sparkles, TrendingUp, Zap, Loader2 } from 'lucide-react';
 import { Button } from './ui/button';
-
+import { API_URL } from "../config/api";
 interface ExploreProps {
   onNavigate: (page: 'home' | 'login' | 'gyms' | 'car-services' | 'restaurants' | 'coworking-spaces' | 'explore' | 'contact-us') => void;
   scrollToSection?: string;
@@ -43,7 +43,7 @@ export const Explore: React.FC<ExploreProps> = ({ onNavigate, scrollToSection })
         setLoading(true);
         setError(null);
         // 🔁 Replace with your actual API base URL if needed
-const response = await fetch('http://localhost:5000/business/get-sponser');
+const response = await fetch(`${API_URL}/business/get-sponser`);
         if (!response.ok) throw new Error('Failed to fetch sponsored services');
         const json = await response.json();
         // json.data is the array returned from getSponsered

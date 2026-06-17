@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { toast } from 'sonner';
-
+import { API_URL } from "../config/api";
 interface Booking {
   _id: string;
 
@@ -263,7 +263,7 @@ export const BusinessBookings: React.FC = () => {
       console.log("TOKEN FROM STORAGE:", localStorage.getItem("business_token"));
 
       const res = await fetch(
-        "http://localhost:5000/business/bookings",
+        `${API_URL}/business/bookings`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -305,7 +305,7 @@ export const BusinessBookings: React.FC = () => {
           );
 
         const res = await fetch(
-          `http://localhost:5000/business/bookings/${bookingId}/status`,
+          `${API_URL}/business/bookings/${bookingId}/status`,
           {
             method: "PATCH",
 

@@ -7,7 +7,7 @@ import {
   Calendar, Users, DollarSign, Star,
   ArrowUp, ArrowDown, Repeat, Target, Clock, XCircle, Award, Activity, Lightbulb, RefreshCw, AlertCircle, CreditCard, Banknote, TrendingUp
 } from 'lucide-react';
-
+import { API_URL } from "../config/api";
 interface BusinessAnalyticsProps {
   onBookingsClick: () => void;
 }
@@ -22,7 +22,7 @@ export const BusinessAnalytics: React.FC<BusinessAnalyticsProps> = ({ onBookings
     setError(false);
     try {
       const token = localStorage.getItem("business_token");
-      const res = await fetch("http://localhost:5000/business/analytics", {
+      const res = await fetch(`${API_URL}/business/analytics`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();

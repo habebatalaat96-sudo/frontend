@@ -9,7 +9,7 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { toast } from 'sonner';
-
+import { API_URL } from "../config/api";
 // =========================
 // Types
 // =========================
@@ -21,6 +21,7 @@ interface Service {
   duration: string;
   price_type: 'fixed' | 'range';
   price?: number;
+  price_after?:number,
   min_price?: number;
   max_price?: number;
   offer: string;
@@ -190,7 +191,7 @@ useEffect(() => {
       const token = localStorage.getItem('business_token');
 
       const res = await fetch(
-        `http://localhost:5000/business/profile`,
+        `${API_URL}/business/profile`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -417,7 +418,7 @@ newPhotoFiles.forEach(file => {
   formData.append('photos', file);
 });
 
-      const res = await fetch('http://localhost:5000/business/request-update', {
+      const res = await fetch(`${API_URL}/business/request-update`, {
         method: 'PATCH',
         headers: { Authorization: `Bearer ${token}` },
         body: formData,

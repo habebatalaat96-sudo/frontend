@@ -5,7 +5,7 @@ import { Star, MapPin, DollarSign, Clock, Phone, Heart, UtensilsCrossed } from '
 import { Button } from './ui/button';
 import axios from "axios";
 import { toast } from 'sonner';
-
+import { API_URL } from "../config/api";
 interface RestaurantsLoggedInProps {
   onNavigate: (page: 'home' | 'login' | 'gyms' | 'car-services' | 'restaurants' | 'coworking-spaces' | 'explore' | 'contact-us' | 'chatbot' | 'service-details', section?: string, tab?: any, serviceData?: any) => void;
 }
@@ -131,7 +131,7 @@ export const RestaurantsLoggedIn: React.FC<RestaurantsLoggedInProps> = ({ onNavi
       };
   
       const res = await axios.post(
-        "http://localhost:5000/saved-places/save",
+        `${API_URL}/saved-places/save`,
         placeData,
         {
           headers: {
@@ -167,7 +167,7 @@ export const RestaurantsLoggedIn: React.FC<RestaurantsLoggedInProps> = ({ onNavi
          const token = localStorage.getItem("token");
    
          const res = await axios.get(
-           "http://localhost:5000/saved-places/my-saved-places",
+           `${API_URL}/saved-places/my-saved-places`,
            {
              headers: {
                Authorization: `Bearer ${token}`
@@ -194,7 +194,7 @@ export const RestaurantsLoggedIn: React.FC<RestaurantsLoggedInProps> = ({ onNavi
       try {
 
         const response = await fetch(
-          "http://localhost:5000/business/restaurants"
+          `${API_URL}/business/restaurants`
         );
 
         const result = await response.json();
@@ -231,7 +231,7 @@ export const RestaurantsLoggedIn: React.FC<RestaurantsLoggedInProps> = ({ onNavi
        try {
    
          await axios.delete(
-           `http://localhost:5000/saved-places/remove/${placeId}`,
+           `${API_URL}/saved-places/remove/${placeId}`,
            {
              headers: {
                Authorization: `Bearer ${localStorage.getItem("token")}`

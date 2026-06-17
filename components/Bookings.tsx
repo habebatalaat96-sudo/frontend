@@ -12,7 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Calendar as CalendarComponent } from './ui/calendar';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
-
+import { API_URL } from "../config/api";
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface Booking {
@@ -154,7 +154,7 @@ export const Bookings: React.FC<BookingsProps> = ({ onNavigate }) => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const res  = await fetch('http://localhost:5000/booking/my-bookings', {
+      const res  = await fetch(`${API_URL}/booking/my-bookings`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -171,7 +171,7 @@ export const Bookings: React.FC<BookingsProps> = ({ onNavigate }) => {
     if (!cancellingBooking) return;
     try {
       const token = localStorage.getItem('token');
-      const res  = await fetch(`http://localhost:5000/booking/cancel-booking/${cancellingBooking.id}`, {
+      const res  = await fetch(`${API_URL}/booking/cancel-booking/${cancellingBooking.id}`, {
         method: 'PUT', headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -274,7 +274,7 @@ export const Bookings: React.FC<BookingsProps> = ({ onNavigate }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const res  = await fetch(`http://localhost:5000/booking/update-booking/${editingBooking.id}`, {
+      const res  = await fetch(`${API_URL}/booking/update-booking/${editingBooking.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify(payload),

@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { MessageSquare, Sparkles, TrendingDown, MapPin, Star, Clock, Heart } from 'lucide-react';
 import { UserPreferences } from './UserPreferences';
-
+import { API_URL } from "../config/api";
 interface LoggedInHomeProps {
   onNavigate: (page: string, section?: string, tab?: any, serviceData?: any) => void;
   userPreferences: UserPreferences;
@@ -197,7 +197,7 @@ const filterByPreferences = (data: any[]) => {
 useEffect(() => {
   const fetchBusinesses = async () => {
     try {
-      const response = await fetch('http://localhost:5000/business/get-sponser');
+      const response = await fetch(`${API_URL}/business/get-sponser`);
       const data = await response.json();
       const formatted = formatBusinesses(data.data);
       
@@ -225,7 +225,7 @@ useEffect(() => {
 useEffect(() => {
   const fetchDeals = async () => {
     try {
-      const res = await fetch('http://localhost:5000/business/get-deals');
+      const res = await fetch(`${API_URL}/business/get-deals`);
       const data = await res.json();
       const formatted = formatBusinesses(data.data);
 

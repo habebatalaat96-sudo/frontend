@@ -22,7 +22,7 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Badge } from './ui/badge';
 import { toast } from 'sonner';
-
+import { API_URL } from "../config/api";
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface OwnerReply {
@@ -48,7 +48,7 @@ interface Review {
 
 // ─── API helpers ──────────────────────────────────────────────────────────────
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = `${API_URL}`;
 
 const getToken = () => localStorage.getItem('business_token') || '';
 

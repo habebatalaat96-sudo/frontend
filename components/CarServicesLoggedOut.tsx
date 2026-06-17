@@ -2,6 +2,8 @@ import React from 'react';
 import { Card } from './ui/card';
 import { Star, MapPin, Lock } from 'lucide-react';
 import { Button } from './ui/button';
+import { API_URL } from "../config/api";
+
 
 interface CarServicesLoggedOutProps {
   onNavigate: (page: 'home' | 'login' | 'gyms' | 'car-services' | 'restaurants' | 'coworking-spaces' | 'explore' | 'contact-us') => void;
@@ -15,7 +17,7 @@ const [loading, setLoading] = React.useState(true);
 React.useEffect(() => {
   const fetchServices = async () => {
     try {
-      const res = await fetch("http://localhost:5000/business/car-services-logged-out");
+      const res = await fetch(`${API_URL}/business/car-services-logged-out`);
       const data = await res.json();
       const all = data.data || [];
 

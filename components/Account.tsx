@@ -5,6 +5,7 @@ import { Badge } from './ui/badge';
 import { User, Settings, Heart, LogOut, Bell, MapPin, Award, TrendingUp, Gift, Star, Trophy, ChevronRight, ChevronDown, Calendar } from 'lucide-react';
 import { UserPreferences } from './UserPreferences';
 import { toast } from 'sonner';
+import { API_URL } from "../config/api";
 
 interface AccountProps {
   onNavigate: (page: string) => void;
@@ -23,6 +24,7 @@ interface AccountProps {
   userPreferences: UserPreferences;
   bookingsCount?: number;
 }
+
 
 export const Account: React.FC<AccountProps> = ({ 
   onNavigate, 
@@ -74,7 +76,7 @@ export const Account: React.FC<AccountProps> = ({
     setActivityLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/auth/recent-activity", {
+      const res = await fetch(`${API_URL}/auth/recent-activity`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -150,7 +152,7 @@ export const Account: React.FC<AccountProps> = ({
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("token");
-      await fetch("http://localhost:5000/auth/logout", {
+      await fetch(`${API_URL}/auth/logout`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

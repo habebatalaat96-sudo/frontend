@@ -18,6 +18,8 @@ import { BusinessProfile } from './BusinessProfile';
 import { BusinessReviews } from './BusinessReviews';
 import { BusinessAlerts } from './BusinessAlerts';
 import { BusinessBookings } from './BusinessBookings';
+import { API_URL } from "../config/api";
+
 // ✅ في BusinessDashboard props interface — أضف
 interface BusinessDashboardProps {
   businessEmail: string;
@@ -71,7 +73,7 @@ const handleOwnerLogout = async () => {
   try {
     const token = localStorage.getItem("business_token");
 
-    await fetch("http://localhost:5000/OwnerCliam/logout", {
+    await fetch(`${API_URL}/OwnerCliam/logout`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

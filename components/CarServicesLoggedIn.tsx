@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { toast } from 'sonner';
-
+import { API_URL } from "../config/api";
 
 interface CarServicesLoggedInProps {
   onNavigate: (page: 'home' | 'login' | 'gyms' | 'car-services' | 'restaurants' | 'coworking-spaces' | 'explore' | 'contact-us' | 'chatbot' | 'service-details', section?: string, tab?: any, serviceData?: any) => void;
@@ -163,7 +163,7 @@ export const CarServicesLoggedIn: React.FC<CarServicesLoggedInProps> = ({ onNavi
       };
 
       const res = await axios.post(
-        "http://localhost:5000/saved-places/save",
+        `${API_URL}/saved-places/save`,
         placeData,
         {
           headers: {
@@ -200,7 +200,7 @@ export const CarServicesLoggedIn: React.FC<CarServicesLoggedInProps> = ({ onNavi
         const token = localStorage.getItem("token");
 
         const res = await axios.get(
-          "http://localhost:5000/saved-places/my-saved-places",
+          `${API_URL}/saved-places/my-saved-places`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -223,7 +223,7 @@ export const CarServicesLoggedIn: React.FC<CarServicesLoggedInProps> = ({ onNavi
   useEffect(() => {
     const fetchCarServices = async () => {
       try {
-        const response = await fetch("http://localhost:5000/business/car-services");
+        const response = await fetch(`${API_URL}/business/car-services`);
         const result = await response.json();
         console.log("CAR SERVICES full result:", JSON.stringify(result));
 console.log("CAR SERVICES data:", result.data);
@@ -263,7 +263,7 @@ console.log("CAR SERVICES status:", response.status);
     try {
 
       await axios.delete(
-        `http://localhost:5000/saved-places/remove/${placeId}`,
+        `${API_URL}/saved-places/remove/${placeId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`

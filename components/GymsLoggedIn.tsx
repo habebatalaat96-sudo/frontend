@@ -4,7 +4,7 @@ import { Star, MapPin, DollarSign, Clock, Phone, Heart, Wifi, Briefcase } from '
 import { Button } from './ui/button';
 import axios from "axios";
 import { toast } from 'sonner';
-
+import { API_URL } from "../config/api";
 interface GymsLoggedInProps {
   onNavigate: (page: 'home' | 'login' | 'gyms' | 'car-services' | 'restaurants' | 'coworking-spaces' | 'explore' | 'contact-us' | 'chatbot' | 'service-details', section?: string, tab?: any, serviceData?: any) => void;
 }
@@ -154,7 +154,7 @@ const [loading, setLoading] = useState(true);
       };
   
       const res = await axios.post(
-        "http://localhost:5000/saved-places/save",
+        `${API_URL}/saved-places/save`,
         placeData,
         {
           headers: {
@@ -191,7 +191,7 @@ const [loading, setLoading] = useState(true);
          const token = localStorage.getItem("token");
    
          const res = await axios.get(
-           "http://localhost:5000/saved-places/my-saved-places",
+           `${API_URL}/saved-places/my-saved-places`,
            {
              headers: {
                Authorization: `Bearer ${token}`
@@ -214,7 +214,7 @@ const [loading, setLoading] = useState(true);
  useEffect(() => {
     const fetchGyms = async () => {
       try {
-        const response = await fetch("http://localhost:5000/business/gyms");
+        const response = await fetch(`${API_URL}/business/gyms`);
         const result = await response.json();
         console.log("GYMS:", result);
         const normalized = (result.data || []).map((b: any) => ({
@@ -249,7 +249,7 @@ const removePlace = async (placeId: number) => {
        try {
    
          await axios.delete(
-           `http://localhost:5000/saved-places/remove/${placeId}`,
+           `${API_URL}/saved-places/remove/${placeId}`,
            {
              headers: {
                Authorization: `Bearer ${localStorage.getItem("token")}`

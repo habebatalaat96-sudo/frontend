@@ -5,7 +5,7 @@ import { Badge } from './ui/badge';
 import { Heart, Star, MapPin, ArrowLeft, Trash2, Phone, Globe } from 'lucide-react';
 import axios from "axios";
 import { toast } from 'sonner';
-
+import { API_URL } from "../config/api";
 interface SavedPlacesProps {
   onNavigate: (page: string, section?: string, tab?: any, serviceData?: any) => void;
 }
@@ -78,7 +78,7 @@ export const SavedPlaces: React.FC<SavedPlacesProps> = ({ onNavigate }) => {
         const token = localStorage.getItem("token");
 
         const res = await axios.get(
-          "http://localhost:5000/saved-places/my-saved-places",
+          `${API_URL}/saved-places/my-saved-places`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -105,7 +105,7 @@ export const SavedPlaces: React.FC<SavedPlacesProps> = ({ onNavigate }) => {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `http://localhost:5000/saved-places/remove/${placeId}`,
+        `${API_URL}/saved-places/remove/${placeId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

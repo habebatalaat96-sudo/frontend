@@ -6,7 +6,7 @@ import { Label } from './ui/label';
 import { Bell, Mail, Smartphone, Gift, MapPin, Star, TrendingUp, Sparkles, ChevronLeft } from 'lucide-react';
 import axios from "axios";
 import { toast } from 'sonner';
-
+import { API_URL } from "../config/api";
 interface NotificationSettingsProps {
   onNavigate: (page: string) => void;
 }
@@ -28,7 +28,7 @@ export const NotificationSettings: React.FC<NotificationSettingsProps> = ({ onNa
     const token = localStorage.getItem("token");
 
     await axios.put(
-      "http://localhost:5000/notification/update-settings",
+      `${API_URL}/notification/update-settings`,
       {
         emailNotifications,
 
@@ -105,7 +105,7 @@ export const NotificationSettings: React.FC<NotificationSettingsProps> = ({ onNa
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://localhost:5000/notification/get-settings",
+        `${API_URL}/notification/get-settings`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -26,6 +26,7 @@ import { Badge } from './ui/badge';
 import { Switch } from './ui/switch';
 import { toast } from 'sonner';
 import axios from "axios";
+import { API_URL } from "../config/api";
 
 
 interface Alert {
@@ -118,7 +119,7 @@ useEffect(() => {
     console.log("TOKEN:", token);
 
     const res = await axios.get(
-      "http://localhost:5000/business/alerts",
+      `${API_URL}/business/alerts`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -178,7 +179,7 @@ const fetchNotificationSettings = async () => {
       localStorage.getItem("business_token");
 
     const res = await axios.get(
-      "http://localhost:5000/business/notification-settings",
+      `${API_URL}/business/notification-settings`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -237,7 +238,7 @@ const fetchNotificationSettings = async () => {
         localStorage.getItem("business_token");
 
       await axios.patch(
-        `http://localhost:5000/business/alerts/${alertId}/read`,
+        `${API_URL}/business/alerts/${alertId}/read`,
         {},
         {
           headers: {
@@ -269,7 +270,7 @@ const fetchNotificationSettings = async () => {
       );
 
     await axios.patch(
-      "http://localhost:5000/business/alerts/read-all",
+      `${API_URL}/business/alerts/read-all`,
       {},
       {
         headers: {
@@ -302,7 +303,7 @@ const fetchNotificationSettings = async () => {
         localStorage.getItem("business_token");
 
       await axios.delete(
-        `http://localhost:5000/business/alerts/${alertId}`,
+        `${API_URL}/business/alerts/${alertId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -329,7 +330,7 @@ const fetchNotificationSettings = async () => {
       localStorage.getItem("business_token");
 
     await axios.patch(
-      "http://localhost:5000/business/notification-settings",
+      `${API_URL}/business/notification-settings`,
       {
         emailNotifications,
         pushNotifications,

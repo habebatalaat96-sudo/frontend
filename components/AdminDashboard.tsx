@@ -25,6 +25,8 @@ import {
 import { socket } from "./socket.context";
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas-pro';
+import { API_URL } from "../config/api";
+
 interface AdminDashboardProps {
   onLogout: () => void;
 }
@@ -291,7 +293,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
         localStorage.getItem("adminToken");
 
       const res = await axios.get(
-        "http://localhost:5000/admin/support",
+        `${API_URL}/admin/support`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -320,7 +322,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
 
       const res =
         await axios.get(
-          "http://localhost:5000/admin/analytics",
+          `${API_URL}/admin/analytics`,
           {
             headers: {
               Authorization:
@@ -345,7 +347,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   useEffect(() => {
     if (!showEmailTemplates) return;
     const token = localStorage.getItem("adminToken");
-    fetch("http://localhost:5000/admin/email-templates", {
+    fetch(`${API_URL}/admin/email-templates`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -361,7 +363,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
     const token = localStorage.getItem("adminToken");
     try {
       const res = await fetch(
-        `http://localhost:5000/admin/email-templates/${selectedTemplate.key}`,
+        `${API_URL}/admin/email-templates/${selectedTemplate.key}`,
         {
           method: "PUT",
           headers: {
@@ -422,7 +424,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
     const token = localStorage.getItem("adminToken");
     try {
       const res = await fetch(
-        `http://localhost:5000/admin/email-templates/${selectedTemplate.key}`,
+        `${API_URL}/admin/email-templates/${selectedTemplate.key}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
@@ -449,7 +451,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
     try {
       const token = localStorage.getItem("adminToken");
       await axios.patch(
-        `http://localhost:5000/admin/support/${ticketId}/reply`,
+        `${API_URL}/admin/support/${ticketId}/reply`,
         { reply },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -470,7 +472,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
         localStorage.getItem("adminToken");
 
       const response = await fetch(
-        `http://localhost:5000/admin/support/${ticketId}/close`,
+        `${API_URL}/admin/support/${ticketId}/close`,
         {
           method: "PATCH",
 
@@ -501,7 +503,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   useEffect(() => {
     const fetchAllSettings = async () => {
       try {
-        const res = await fetch("http://localhost:5000/settings/get-settings", {
+        const res = await fetch(`${API_URL}/settings/get-settings`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("adminToken")}` },
         });
         if (res.status === 401) { toast.error("Session expired"); return; }
@@ -557,7 +559,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
     }, ...prev]);
 
     try {
-      await fetch("http://localhost:5000/admin/activity-logs", {
+      await fetch(`${API_URL}/admin/activity-logs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -577,7 +579,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
       autoApproveReviews,
     });
     try {
-      const res = await fetch("http://localhost:5000/settings/update-settings", {
+      const res = await fetch(`${API_URL}/settings/update-settings`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -610,7 +612,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
     try {
       const token = localStorage.getItem("adminToken");
 
-      const res = await fetch("http://localhost:5000/admin/users", {
+      const res = await fetch(`${API_URL}/admin/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -645,7 +647,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   const fetchBookings = async () => {
     const token = localStorage.getItem("adminToken");
 
-    const res = await fetch("http://localhost:5000/admin/bookings", {
+    const res = await fetch(`${API_URL}/admin/bookings`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -657,7 +659,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   const fetchReviews = async () => {
     try {
       const token = localStorage.getItem("adminToken");
-      const res = await fetch("http://localhost:5000/admin/all", {
+      const res = await fetch(`${API_URL}/admin/all`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -672,7 +674,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   const handleSaveNotificationSettings = async () => {
     setNotifSaving(true);
     try {
-      const res = await fetch("http://localhost:5000/settings/update-settings", {
+      const res = await fetch(`${API_URL}/settings/update-settings`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -697,7 +699,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   const fetchCollections = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch('http://localhost:5000/admin/collections', {
+      const res = await fetch(`${API_URL}/admin/collections`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -716,7 +718,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
     try {
       const token = localStorage.getItem("adminToken");
       if (!token) { toast.error("Unauthorized: No admin token found"); return; }
-      const res = await fetch("http://localhost:5000/admin/businesses", {
+      const res = await fetch(`${API_URL}/admin/businesses`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -744,7 +746,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   const fetchPendingUpdates = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch('http://localhost:5000/admin/pending-updates', {
+      const res = await fetch(`${API_URL}/admin/pending-updates`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -762,7 +764,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   const handleReviewUpdate = async (businessId: string, action: 'approved' | 'rejected') => {
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`http://localhost:5000/admin/businesses/${businessId}/review-update`, {
+      const res = await fetch(`${API_URL}/admin/businesses/${businessId}/review-update`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ action, admin_note: reviewNote }),
@@ -785,7 +787,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   const fetchActivityLogs = async () => {
     try {
       const token = localStorage.getItem("adminToken");
-      const res = await fetch("http://localhost:5000/admin/activity-logs", {
+      const res = await fetch(`${API_URL}/admin/activity-logs`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -831,7 +833,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
     try {
       const token = localStorage.getItem("adminToken");
       if (!token) { toast.error("Unauthorized: No admin token found"); return; }
-      const res = await fetch("http://localhost:5000/admin/claims", {
+      const res = await fetch(`${API_URL}/admin/claims`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -888,7 +890,7 @@ useEffect(() => {
     try {
       const token = localStorage.getItem("adminToken");
 
-      const res = await fetch("http://localhost:5000/admin/users", {
+      const res = await fetch(`${API_URL}/admin/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -997,7 +999,7 @@ useEffect(() => {
   const handleExportData = async (format: 'json' | 'pdf' = 'json') => {
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch('http://localhost:5000/admin/export', {
+      const res = await fetch(`${API_URL}/admin/export`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -1026,7 +1028,7 @@ useEffect(() => {
   const handleExportCollection = async (collectionName: string, format: 'json' | 'pdf' = 'json') => {
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch(`http://localhost:5000/admin/export/${collectionName}`, {
+      const res = await fetch(`${API_URL}/admin/export/${collectionName}`, {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -1059,7 +1061,7 @@ useEffect(() => {
 
       const loadingToast = toast.loading('Syncing data...');
 
-      await fetch('http://localhost:5000/admin/sync', {
+      await fetch(`${API_URL}/admin/sync`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -1083,7 +1085,7 @@ useEffect(() => {
   const handleClearCache = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const res = await fetch('http://localhost:5000/admin/clear-cache', {
+      const res = await fetch(`${API_URL}/admin/clear-cache`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -1126,7 +1128,7 @@ useEffect(() => {
         formData.append("photos", file);
       });
 
-      const res = await fetch("http://localhost:5000/admin/add-business", {
+      const res = await fetch(`${API_URL}/admin/add-business`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
@@ -1230,7 +1232,7 @@ useEffect(() => {
       const token = localStorage.getItem("adminToken");
 
       if (action === 'delete') {
-        const res = await fetch(`http://localhost:5000/admin/users/${userId}`, {
+        const res = await fetch(`${API_URL}/admin/users/${userId}`, {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -1244,7 +1246,7 @@ useEffect(() => {
 
       const status = action === "suspend" ? "suspended" : "active";
 
-      const res = await fetch(`http://localhost:5000/admin/users/${userId}/status`, {
+      const res = await fetch(`${API_URL}/admin/users/${userId}/status`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -1284,7 +1286,7 @@ useEffect(() => {
   const handleViewDetails = async (id: string, type: "business" | "claim") => {
     try {
       const token = localStorage.getItem("adminToken");
-      const res = await fetch("http://localhost:5000/admin/view-details", {
+      const res = await fetch(`${API_URL}/admin/view-details`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ id, type }),
@@ -1328,7 +1330,7 @@ useEffect(() => {
     const bookingName = bookings.find(b => b._id === bookingId)?.businessName ?? '';
 
     const res = await fetch(
-      `http://localhost:5000/admin/bookings/${bookingId}/status`,
+      `${API_URL}/admin/bookings/${bookingId}/status`,
       {
         method: "PATCH",
         headers: {
@@ -1356,7 +1358,7 @@ useEffect(() => {
   const handleSendTierEmail = async (userId: string, userName: string) => {
     try {
       const token = localStorage.getItem("adminToken");
-      const res = await fetch(`http://localhost:5000/admin/users/${userId}/send-tier-reward`, {
+      const res = await fetch(`${API_URL}/admin/users/${userId}/send-tier-reward`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -1442,7 +1444,7 @@ useEffect(() => {
     try {
       const token = localStorage.getItem("adminToken");
 
-      await fetch("http://localhost:5000/admin/logout", {
+      await fetch(`${API_URL}/admin/logout`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -1956,7 +1958,7 @@ useEffect(() => {
     setAnalyticsLoading(true);
     try {
       const token = localStorage.getItem("adminToken");
-      const res = await fetch("http://localhost:5000/admin/analytics/users", {
+      const res = await fetch(`${API_URL}/admin/analytics/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -2772,7 +2774,7 @@ useEffect(() => {
 
   const handlePaymentAction = async (bookingId: string, action: 'approved' | 'rejected') => {
     const token = localStorage.getItem("adminToken");
-    const res = await fetch(`http://localhost:5000/admin/bookings/${bookingId}/payment-status`, {
+    const res = await fetch(`${API_URL}/admin/bookings/${bookingId}/payment-status`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify({ action }),

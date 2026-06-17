@@ -42,7 +42,7 @@ import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Calendar as CalendarComponent } from './ui/calendar';
 import { format } from 'date-fns';
 import axios from "axios";
-
+import { API_URL } from "../config/api";
 interface ServiceData {
   businessLogo?: string;
   _id?: string;
@@ -210,7 +210,7 @@ const [instapayFile, setInstapayFile] = useState<File | null>(null);
     const getReviews = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/reviews/business/${serviceData.id}`
+          `${API_URL}/reviews/business/${serviceData.id}`
         );
         setReviews(res.data.data);
       } catch (error) {
@@ -228,7 +228,7 @@ const [instapayFile, setInstapayFile] = useState<File | null>(null);
     if (isSaved) {
 
       await axios.delete(
-        `http://localhost:5000/saved-places/remove/${serviceData.id}`,
+        `${API_URL}/saved-places/remove/${serviceData.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -255,7 +255,7 @@ const [instapayFile, setInstapayFile] = useState<File | null>(null);
       };
 
       await axios.post(
-        "http://localhost:5000/saved-places/save",
+        `${API_URL}/saved-places/save`,
         placeData,
         {
           headers: {
@@ -284,7 +284,7 @@ useEffect(() => {
       if (!token) return; // ✅ لو مفيش token متعملش الـ request
 
       const res = await axios.get(
-        "http://localhost:5000/saved-places/my-saved-places",
+        `${API_URL}/saved-places/my-saved-places`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -410,7 +410,7 @@ const createBooking = async () => {
       formData.append('depositAmount', String(depositAmount));
     }
 
-    const response = await fetch("http://localhost:5000/booking/create-booking", {
+    const response = await fetch(`${API_URL}/booking/create-booking`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`, // ✅ بدون Content-Type
@@ -488,7 +488,7 @@ const handleSubmitReview = async () => {
     });
 
     const res = await axios.post(
-      "http://localhost:5000/reviews",
+      `${API_URL}/reviews`,
       formData,
       {
         headers: {

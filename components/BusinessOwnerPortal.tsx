@@ -12,6 +12,7 @@ import { z } from "zod";
 import { businessEnum } from './businessEnum';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { API_URL } from "../config/api";
 interface BusinessOwnerPortalProps {
   onNavigate: any;
   // onNavigate: (page: 'home' | 'login' | 'gyms' | 'car-services' | 'restaurants' | 'coworking-spaces' | 'explore' | 'contact-us' | 'businesses' | 'business-portal', section?: string, tab?: 'list' | 'claim' | 'login') => void;
@@ -156,7 +157,7 @@ export const BusinessOwnerPortal: React.FC<BusinessOwnerPortalProps> = ({ onNavi
 
       const token = localStorage.getItem("user_token"); // 👈 مهم لو عندك auth
 
-      const res = await fetch("http://localhost:5000/OwnerCliam/claim", {
+      const res = await fetch(`${API_URL}/OwnerCliam/claim`, {
         method: "POST",
         body: formData,
         headers: token
@@ -212,7 +213,7 @@ export const BusinessOwnerPortal: React.FC<BusinessOwnerPortalProps> = ({ onNavi
     }
 
     try {
-      const res = await fetch("http://localhost:5000/OwnerCliam/login-password", {
+      const res = await fetch(`${API_URL}/OwnerCliam/login-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -253,7 +254,7 @@ localStorage.setItem(
     setIsSubmitting(true);
 
     try {
-      const res = await fetch("http://localhost:5000/OwnerCliam/login", {
+      const res = await fetch(`${API_URL}/OwnerCliam/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -293,7 +294,7 @@ localStorage.setItem(
 
     try {
       const res = await fetch(
-        "http://localhost:5000/OwnerCliam/verify-otp",
+        `${API_URL}/OwnerCliam/verify-otp`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -327,7 +328,7 @@ const handleForgotPassword = async () => {
   if (!loginFormData.email) { toast.error("Email is required"); return; }
   setIsSubmitting(true);
   try {
-    const res = await fetch("http://localhost:5000/OwnerCliam/forget-password", {
+    const res = await fetch(`${API_URL}/OwnerCliam/forget-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: loginFormData.email.trim().toLowerCase() }),
@@ -373,7 +374,7 @@ const handleForgotPassword = async () => {
 
     try {
       const res = await fetch(
-        "http://localhost:5000/OwnerCliam/change-password",
+        `${API_URL}/OwnerCliam/change-password`,
         {
           method: "PATCH",
           headers: {
@@ -464,7 +465,7 @@ const handleForgotPassword = async () => {
 
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:5000/OwnerCliam/list", {
+      const res = await fetch(`${API_URL}/OwnerCliam/list`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

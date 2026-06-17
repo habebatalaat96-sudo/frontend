@@ -8,7 +8,7 @@ import { Badge } from './ui/badge';
 import { MapPin, Heart, DollarSign, Users, Sparkles } from 'lucide-react';
 import { toast } from "sonner";
 import axios from "axios";
-
+import { API_URL } from "../config/api";
 interface UserPreferencesProps {
   onComplete: (preferences: UserPreferences) => void;
   isEditing?: boolean;
@@ -140,7 +140,7 @@ const [location, setLocation] = useState(
     };
 
     const res = await axios.post(
-      "http://localhost:5000/preferences/save-preferences",
+      `${API_URL}/preferences/save-preferences`,
       preferencesData,
       {
         headers: {
@@ -175,7 +175,7 @@ useEffect(() => {
   const getPreferences = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/preferences/my-preferences",
+        `${API_URL}/preferences/my-preferences`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`

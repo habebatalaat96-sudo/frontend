@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from './ui/card';
 import { Star, MapPin, Lock } from 'lucide-react';
 import { Button } from './ui/button';
-
+import { API_URL } from "../config/api";
 interface GymsLoggedOutProps {
   onNavigate: (page: 'home' | 'login' | 'gyms' | 'car-services' | 'restaurants' | 'coworking-spaces' | 'explore' | 'contact-us') => void;
 }
@@ -17,7 +17,7 @@ export const GymsLoggedOut: React.FC<GymsLoggedOutProps> = ({ onNavigate }) => {
   React.useEffect(() => {
     const fetchGyms = async () => {
       try {
-        const res = await fetch("http://localhost:5000/business/gyms-logged-out");
+        const res = await fetch(`${API_URL}/business/gyms-logged-out`);
         const data = await res.json();
         const all = data.data || [];
 

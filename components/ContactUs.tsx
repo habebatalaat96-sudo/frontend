@@ -5,7 +5,7 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Mail, Phone, MessageSquare, Send, CheckCircle } from 'lucide-react';
-
+import { API_URL } from "../config/api";
 interface ContactUsProps {
   onNavigate: (page: 'home' | 'login' | 'gyms' | 'car-services' | 'restaurants' | 'coworking-spaces' | 'explore' | 'contact-us' | 'businesses' | 'business-portal', section?: string, tab?: 'list' | 'claim' | 'login') => void;
 }
@@ -50,7 +50,7 @@ const [loading, setLoading] = useState(false);
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      "http://localhost:5000/auth/support",
+      `${API_URL}/auth/support`,
       {
         method: "POST",
         headers: {

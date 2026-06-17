@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 
 import { toast } from "sonner";
-
+import { API_URL } from "../config/api";
 
 interface ProfileSettingsProps {
   onNavigate: (page: string) => void;
@@ -194,7 +194,7 @@ const fullName = (userName || "").split(" ");
 
       const response =
         await fetch(
-          "http://localhost:5000/auth/update-profile",
+          `${API_URL}/auth/update-profile`,
           {
             method: "PUT",
 
