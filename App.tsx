@@ -31,6 +31,7 @@ import { Bookings } from './components/Bookings';
 import { AdminDashboard } from './components/AdminDashboard';
 import { pdfjs } from "react-pdf";
 import { BusinessDashboard } from './components/BusinessDashboard';
+import { API_URL } from "./config/api.ts";
 
 export default function App() {
     pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -100,7 +101,7 @@ const [isUnderMaintenance, setIsUnderMaintenance] = useState(false);
   useEffect(() => {
     const checkMaintenance = async () => {
       try {
-        const res = await fetch("http://localhost:5000/check-maintenance");
+        const res = await fetch(`${API_URL}/check-maintenance`);
         if (res.status === 503) {
           setIsUnderMaintenance(true);
         } else {
@@ -369,7 +370,7 @@ React.useEffect(() => {
     // ✅ جيب الـ preferences من الـ backend
     const token = localStorage.getItem('token');
     if (token) {
-      fetch('http://localhost:5000/preferences/my-preferences', {
+      fetch(`${API_URL}/preferences/my-preferences`, {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(res => res.json())

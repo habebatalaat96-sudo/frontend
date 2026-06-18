@@ -1304,9 +1304,9 @@ useEffect(() => {
   const handleBusinessAction = async (businessId: string, action: string) => {
     try {
       const token = localStorage.getItem("adminToken");
-      const url = action === "approve" ? "http://localhost:5000/admin/business/approve"
-        : action === "reject" ? "http://localhost:5000/admin/business/reject"
-          : "http://localhost:5000/admin/business/delete";
+      const url = action === "approve" ? `${API_URL}/admin/business/approve`
+        : action === "reject" ? `${API_URL}/admin/business/reject`
+          : `${API_URL}/admin/business/delete`;
       const options = action === "delete"
         ? { method: "DELETE", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify({ businessId }) }
         : { method: "PATCH", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify({ businessId }) };
@@ -1378,13 +1378,13 @@ useEffect(() => {
     let url = "";
     let options: RequestInit = { headers: { Authorization: `Bearer ${token}` } };
     if (action === "approve") {
-      url = `http://localhost:5000/admin/claim/approve/${id}`;
+      url = `${API_URL}/admin/claim/approve/${id}`;
       options = { method: "PATCH", headers: { Authorization: `Bearer ${token}` } };
     } else if (action === "reject") {
-      url = `http://localhost:5000/admin/claim/reject/${id}`;
+      url = `${API_URL}/admin/claim/reject/${id}`;
       options = { method: "PATCH", headers: { Authorization: `Bearer ${token}` } };
     } else if (action === "delete") {
-      url = `http://localhost:5000/admin/claim/${id}`;
+      url = `${API_URL}/admin/claim/${id}`;
       options = { method: "DELETE", headers: { Authorization: `Bearer ${token}` } };
     }
     try {
@@ -1417,10 +1417,10 @@ useEffect(() => {
     try {
       const token = localStorage.getItem("adminToken");
       const url = action === 'approve'
-        ? `http://localhost:5000/admin/${reviewId}/approve`
+        ? `${API_URL}/admin/${reviewId}/approve`
         : action === 'reject'
-          ? `http://localhost:5000/admin/${reviewId}/reject`
-          : `http://localhost:5000/admin/${reviewId}`;
+          ? `${API_URL}/admin/${reviewId}/reject`
+          : `${API_URL}/admin/${reviewId}`;
       const method = action === 'delete' ? 'DELETE' : 'PATCH';
       const res = await fetch(url, {
         method,
