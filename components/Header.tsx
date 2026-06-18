@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from './ui/button';
-import spotLogo from '../assets/87d319d70a74f2182b104a15a264753a0cfb9143.png';
+// import spotLogo from '../assets/87d319d70a74f2182b104a15a264753a0cfb9143.png';
 
 // ChevronDown SVG component
 const ChevronDown = ({ className }: { className?: string }) => (
@@ -71,7 +71,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate, isLoggedIn = false, 
             className="flex-shrink-0 transform hover:scale-110 transition-transform duration-300 drop-shadow-lg"
           >
             <img 
-              src={spotLogo} 
+              src="../assets/87d319d70a74f2182b104a15a264753a0cfb9143.png"
               alt="SPOT Logo" 
               className="h-12 w-auto max-w-none"
               style={{ minWidth: '120px' }}
