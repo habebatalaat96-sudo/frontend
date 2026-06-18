@@ -5,10 +5,10 @@ import { Label } from './ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Separator } from './ui/separator';
-import spotLogo from 'figma:asset/87d319d70a74f2182b104a15a264753a0cfb9143.png';
+// import spotLogo from 'figma:asset/87d319d70a74f2182b104a15a264753a0cfb9143.png';
 import { GoogleLogin } from "@react-oauth/google";
 import { toast } from "sonner";
-import FacebookLogin from 'react-facebook-login';
+// import FacebookLogin from 'react-facebook-login';
 import { API_URL } from "../config/api";
 // Eye icons as inline SVG components
 const Eye = ({ className }: { className?: string }) => (
@@ -353,7 +353,7 @@ export const Login: React.FC<LoginProps> = ({ onNavigate, onLoginSuccess }) => {
       {/* Background Elements */}
       <div className="absolute inset-0 flex items-center justify-center opacity-3 pointer-events-none">
         <img
-          src={spotLogo}
+          src="../assets/87d319d70a74f2182b104a15a264753a0cfb9143.png"
           alt="SPOT Watermark"
           className="w-[600px] h-[600px] object-contain transform -rotate-12"
         />
@@ -644,18 +644,18 @@ export const Login: React.FC<LoginProps> = ({ onNavigate, onLoginSuccess }) => {
                       {/* Google Login الحقيقي */}
                       <div className="w-full h-12 border-2 border-gray-200 hover:border-purple-300 hover:bg-purple-50/50 transition-all duration-200"
                       >
-                      <GoogleLogin
-  onSuccess={handleGoogleSuccess}
-  onError={() => console.log("Google Login Failed")}
-  text="continue_with"
-  shape="rectangular"
-  theme="outline"
-  size="large"
-/>
+                        <GoogleLogin
+                          onSuccess={handleGoogleSuccess}
+                          onError={() => console.log("Google Login Failed")}
+                          text="continue_with"
+                          shape="rectangular"
+                          theme="outline"
+                          size="large"
+                        />
                       </div>
 
 
-                      
+
                       {/* Social Login Information */}
                       <div className="mt-4 pt-4 border-t border-gray-200">
                         <p className="text-xs text-gray-500 text-center">

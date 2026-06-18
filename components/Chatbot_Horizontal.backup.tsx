@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
 import { Send, Sparkles, MapPin, Star, Heart, ChevronRight } from 'lucide-react';
-import spotLogo from 'figma:asset/87d319d70a74f2182b104a15a264753a0cfb9143.png';
+// import spotLogo from 'figma:asset/87d319d70a74f2182b104a15a264753a0cfb9143.png';
 
 interface ChatbotProps {
   onNavigate: (page: string) => void;
@@ -163,7 +163,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate, userName, userLoca
     if (lowerQuery.includes('cowork') || lowerQuery.includes('workspace') || lowerQuery.includes('office')) {
       return allRecommendations.filter(r => r.category === 'Co-working Spaces');
     }
-    
+
     // Default: return top 3 mixed recommendations
     return allRecommendations.slice(0, 3);
   };
@@ -187,7 +187,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate, userName, userLoca
       const recommendations = getMockRecommendations(inputValue);
       const botResponse: Message = {
         id: messages.length + 2,
-        text: recommendations.length > 0 
+        text: recommendations.length > 0
           ? `Great! I found ${recommendations.length} amazing ${recommendations[0].category.toLowerCase()} options near you in ${userLocation}. Here are my top recommendations:`
           : `I found some great options for you in ${userLocation}. Check these out:`,
         isUser: false,
@@ -223,9 +223,9 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate, userName, userLoca
     <div className="h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50/30 pt-20 flex flex-col relative overflow-hidden">
       {/* SPOT Logo Watermark */}
       <div className="fixed inset-0 flex items-center justify-center opacity-[0.015] pointer-events-none z-0">
-        <img 
-          src={spotLogo} 
-          alt="" 
+        <img
+          src="../assets/87d319d70a74f2182b104a15a264753a0cfb9143.png"
+          alt=""
           className="w-[1000px] h-[1000px] object-contain transform rotate-12"
         />
       </div>
@@ -285,11 +285,10 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate, userName, userLoca
                       )}
                       <div>
                         <div
-                          className={`px-5 py-3 rounded-[18px] shadow-md ${
-                            message.isUser
+                          className={`px-5 py-3 rounded-[18px] shadow-md ${message.isUser
                               ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-tr-none'
                               : 'bg-white border-2 border-gray-100 text-gray-800 rounded-tl-none'
-                          }`}
+                            }`}
                         >
                           <p className="leading-relaxed">{message.text}</p>
                         </div>
@@ -315,7 +314,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate, userName, userLoca
                           <Card
                             key={rec.id}
                             className="flex-shrink-0 w-[320px] cursor-pointer group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 rounded-[18px] border-2 border-cyan-100 overflow-hidden bg-white snap-center"
-                            onClick={() => {/* TODO: Navigate to business page */}}
+                            onClick={() => {/* TODO: Navigate to business page */ }}
                           >
                             {/* Image */}
                             <div className="relative h-48 overflow-hidden">
@@ -325,7 +324,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate, userName, userLoca
                                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                              
+
                               {/* Status Badge */}
                               <div className="absolute top-3 left-3">
                                 <Badge className={`${rec.isOpen ? 'bg-green-500' : 'bg-red-500'} text-white border-none font-bold`}>
@@ -379,7 +378,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate, userName, userLoca
                               </div>
 
                               {/* Action Button */}
-                              <Button 
+                              <Button
                                 className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white rounded-[18px] font-bold group"
                                 onClick={(e) => {
                                   e.stopPropagation();
@@ -393,7 +392,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ onNavigate, userName, userLoca
                           </Card>
                         ))}
                       </div>
-                      
+
                       {/* Scroll Hint */}
                       {message.recommendations && message.recommendations.length > 1 && (
                         <div className="flex items-center justify-center gap-2 mt-3 text-sm text-gray-400 animate-pulse">
