@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from './ui/button';
-import spotLogo from 'figma:asset/87d319d70a74f2182b104a15a264753a0cfb9143.png';
+import spotLogo from '../assets/87d319d70a74f2182b104a15a264753a0cfb9143.png';
 
 // ChevronDown SVG component
 const ChevronDown = ({ className }: { className?: string }) => (
