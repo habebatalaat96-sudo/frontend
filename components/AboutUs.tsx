@@ -1,5 +1,5 @@
 import React from 'react';
-import spotLogo from 'figma:asset/87d319d70a74f2182b104a15a264753a0cfb9143.png';
+// import spotLogo from 'figma:asset/87d319d70a74f2182b104a15a264753a0cfb9143.png';
 import { Eye, Zap, Lightbulb, MapPin, MessageSquare, Sparkles, Dumbbell, Coffee, Car, Briefcase, TrendingUp, Users, Shield } from 'lucide-react';
 
 export const AboutUs: React.FC = () => {
@@ -7,9 +7,10 @@ export const AboutUs: React.FC = () => {
     <section id="about-us" className="relative min-h-screen py-24 px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-white to-cyan-50/30 overflow-hidden">
       {/* Watermark Logo Background */}
       <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
-        <img 
-          src={spotLogo} 
-          alt="" 
+        <img
+          src="../assets/87d319d70a74f2182b104a15a264753a0cfb9143.png"
+
+          alt=""
           className="w-[800px] h-[800px] object-contain transform rotate-12"
           aria-hidden="true"
         />
@@ -18,7 +19,7 @@ export const AboutUs: React.FC = () => {
       {/* Floating gradient orbs */}
       <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-cyan-200/20 to-purple-200/20 rounded-full blur-3xl animate-pulse" aria-hidden="true"></div>
       <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-r from-purple-200/20 to-cyan-200/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} aria-hidden="true"></div>
-      
+
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
@@ -42,8 +43,8 @@ export const AboutUs: React.FC = () => {
               <h3 className="text-2xl bg-gradient-to-r from-cyan-600 to-purple-600 bg-clip-text text-transparent">Our Vision</h3>
             </div>
             <p className="text-gray-700 leading-relaxed">
-              To revolutionize how people discover and connect with local services by creating a seamless, 
-              intelligent platform that understands individual needs and delivers personalized recommendations 
+              To revolutionize how people discover and connect with local services by creating a seamless,
+              intelligent platform that understands individual needs and delivers personalized recommendations
               instantly, making every search for the perfect "spot" effortless and rewarding.
             </p>
           </div>
@@ -57,8 +58,8 @@ export const AboutUs: React.FC = () => {
               <h3 className="text-2xl bg-gradient-to-r from-purple-600 to-cyan-600 bg-clip-text text-transparent">Our Mission</h3>
             </div>
             <p className="text-gray-700 leading-relaxed">
-              To provide a centralized, user-friendly, and secure platform that connects users with local services 
-              including restaurants, gyms, car services, and co-working spaces, while leveraging 
+              To provide a centralized, user-friendly, and secure platform that connects users with local services
+              including restaurants, gyms, car services, and co-working spaces, while leveraging
               cutting-edge AI technology to streamline the discovery process and enhance user experience.
             </p>
           </div>
@@ -79,7 +80,7 @@ export const AboutUs: React.FC = () => {
                 Our intelligent system uses advanced AI and NLP to understand your needs and deliver personalized service recommendations.
               </p>
             </div>
-            
+
             <div className="bg-white/80 backdrop-blur-sm rounded-[18px] p-8 shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MapPin className="w-8 h-8 text-white" aria-hidden="true" />
@@ -89,7 +90,7 @@ export const AboutUs: React.FC = () => {
                 Integrated with Google Maps API to provide accurate, location-specific recommendations based on your preferences and budget.
               </p>
             </div>
-            
+
             <div className="bg-white/80 backdrop-blur-sm rounded-[18px] p-8 shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 text-center">
               <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MessageSquare className="w-8 h-8 text-white" aria-hidden="true" />
